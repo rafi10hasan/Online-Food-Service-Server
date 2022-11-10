@@ -73,17 +73,6 @@ async function run() {
 
 
 
-//     app.get('/review', async(req, res) =>{
-//     let query= {}
-//     if(req.query.ServiceId){
-//       query={
-//         ServiceId : req.query.ServiceId
-//       }
-//     }
-//     const services = reviewsCollection.find(query);
-//     const result = await services.toArray();
-//     res.send(result)
-//   })
 
   //----------------------------------------------
     app.get("/services/:id", async (req, res) => {
@@ -124,7 +113,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`cloud kitchen server running on ${port}`);
+  console.log(`cloud kitchen server is running ${port}`);
 });
 
 // kitchenDbUser
@@ -158,59 +147,3 @@ app.listen(port, () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------- Review get by ID query -------------------------
-
-// app.get('/review/:id', async(req, res) =>{
-//     const id = req.params.id;
-//     const query = {_id: ObjectId(id)};
-//     const result = await reviewCollection.findOne(query);
-//     res.send(result)
-//   })
-
-//   app.get('/review', async(req, res) =>{
-//     let query= {}
-//     if(req.query.ServiceId){
-//       query={
-//         ServiceId : req.query.ServiceId
-//       }
-//     }
-//     const services = reviewCollection.find(query);
-//     const result = await services.toArray();
-//     res.send(result)
-//   })
-
-//   //----------------------- Review with email query -----------------------------
-//   app.get('/reviews', async(req, res) =>{
-//     let query= {}
-//     if(req.query.UserEmail){
-//       query={
-//         UserEmail : req.query.UserEmail
-//       }
-//     }
-//     const services = reviewCollection.find(query);
-//     const result = await services.toArray();
-//     res.send(result)
-//   })
