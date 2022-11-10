@@ -48,18 +48,42 @@ async function run() {
       res.send(result);
     });
 
+    // this for update review 
+    app.put('/reviews/:id', async(req, res)=>{
+        const id = req.params.id;
+        const updateReview = req.body;
+        const filter = {_id: ObjectId(id)};
+        const options = {upsert: true};
+        const updateDoc = {
+            $set:{
+                name: updateReview.name,
+                image: updateReview.image,
+                rating: updateReview.rating,
+                reviews: updateReview.reviews,
+                // id: updateReview.id,
+                email: updateReview.email
 
-    app.get('/review', async(req, res) =>{
-    let query= {}
-    if(req.query.ServiceId){
-      query={
-        ServiceId : req.query.ServiceId
-      }
-    }
-    const services = reviewsCollection.find(query);
-    const result = await services.toArray();
-    res.send(result)
-  })
+            }
+
+        }
+        const result = await reviewsCollection.updateOne(filter, updateDoc, options)
+        res.send(result)
+        
+    })
+
+
+
+//     app.get('/review', async(req, res) =>{
+//     let query= {}
+//     if(req.query.ServiceId){
+//       query={
+//         ServiceId : req.query.ServiceId
+//       }
+//     }
+//     const services = reviewsCollection.find(query);
+//     const result = await services.toArray();
+//     res.send(result)
+//   })
 
   //----------------------------------------------
     app.get("/services/:id", async (req, res) => {
@@ -96,7 +120,7 @@ async function run() {
 run().catch((err) => console.error(err));
 
 app.get("/", (req, res) => {
-  res.send("cloud kitchen server is running");
+  res.send("cloud kitchen server is is running");
 });
 
 app.listen(port, () => {
