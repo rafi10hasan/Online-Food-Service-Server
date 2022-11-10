@@ -57,7 +57,7 @@ async function run() {
     });
 
     //review get ....................................
-    app.get("/reviews",verifyJWT, async (req, res) => {
+    app.get("/reviews", async (req, res) => {
       const query = {};
       const cursor = reviewsCollection.find(query);
       const reviews = await cursor.toArray();
@@ -66,7 +66,7 @@ async function run() {
 
     //filtering review
 
-    app.get("/reviews/:id",verifyJWT, async (req, res) => {
+    app.get("/reviews/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await reviewsCollection.findOne(query);
@@ -74,7 +74,7 @@ async function run() {
     });
 
     // this for update review 
-    app.put('/reviews/:id',verifyJWT, async(req, res)=>{
+    app.put('/reviews/:id', async(req, res)=>{
         const id = req.params.id;
         const updateReview = req.body;
         const filter = {_id: ObjectId(id)};
@@ -96,9 +96,6 @@ async function run() {
         
     })
 
-    
-
-
 
   //----------------------------------------------
     app.get("/services/:id", async (req, res) => {
@@ -108,14 +105,14 @@ async function run() {
       res.send(service);
     });
 
-    app.post("/services", async (req, res) => {
+    app.post("/services",  async (req, res) => {
       const newitems = req.body;
       console.log("send data ", newitems);
       const result = await servicesCollection.insertOne(newitems);
       res.send(result);
     });
 
-    app.post("/reviews",verifyJWT, async (req, res) => {
+    app.post("/reviews", async (req, res) => {
       const newitems = req.body;
       console.log("send data ", newitems);
       const result = await reviewsCollection.insertOne(newitems);
@@ -123,7 +120,7 @@ async function run() {
     });
 
     //delet review
-    app.delete("/reviews/:id",verifyJWT, async (req, res) => {
+    app.delete("/reviews/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await reviewsCollection.deleteOne(query);
@@ -135,15 +132,14 @@ async function run() {
 run().catch((err) => console.error(err));
 
 app.get("/", (req, res) => {
-  res.send("cloud kitchen server is is running");
+  res.send("cloud kitchen server iss running");
 });
 
 app.listen(port, () => {
   console.log(`cloud kitchen server is running ${port}`);
 });
 
-// kitchenDbUser
-// T1oJAJvu2XP4GCvo
+
 
 
 
